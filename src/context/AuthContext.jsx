@@ -24,11 +24,14 @@ export const AuthProvdier = ({ children }) => {
         try {
 
             const res = await registerRequest(user)
-
-            setIsAuthenticated(true)
+            console.log('register',res)
+          if (res.status === 200) {
             setUser(res.data)
+            setIsAuthenticated(true)
+          }
+           
         } catch (error) {
-
+            console.log(error.response)
             setErrors(error.response.data)
         }
     }
@@ -47,6 +50,12 @@ export const AuthProvdier = ({ children }) => {
         }
     }
 
+    const logout = () => { 
+        Cookies.remove('token')
+        Cookies.remove('cookie_usuario')
+        setIsAuthenticated(false)
+        setUser(null)
+    }
     useEffect(() => {
         if (errors.length > 0) {
             setTimeout(() => {
@@ -92,7 +101,7 @@ export const AuthProvdier = ({ children }) => {
 
 
 return (
-    <AuthContext.Provider value={{ signup, signin,loading, user, isAuthenticated, errors }}>
+    <AuthContext.Provider value={{ signup, signin,logout, loading, user, isAuthenticated, errors }}>
         {children}
     </AuthContext.Provider>
 )

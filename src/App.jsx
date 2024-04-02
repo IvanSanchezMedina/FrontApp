@@ -5,11 +5,12 @@ import LoginPage from './pages/LoginPage'
 import { AuthProvdier } from './context/AuthContext'
 import HomePage from './pages/HomePage'
 import ProtectedRoute from './ProtectedRoute'
-
+import Navbar from './components/navbar'
 function App() {
   return (
     <AuthProvdier>
       <BrowserRouter>
+      <Navbar/>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage> </LoginPage>} />
