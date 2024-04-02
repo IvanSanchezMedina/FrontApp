@@ -14,7 +14,7 @@ function LoginPage() {
   }, [isAuthenticated])
 
   const onSubmit = handleSubmit(async (values) => {
-    // console.log("values :", values)
+
     signin(values)
 
   })
