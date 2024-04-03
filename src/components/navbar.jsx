@@ -29,11 +29,13 @@ function NavbarComponent() {
                                 arrowIcon={false}
                                 inline
                                 label={
-                                    <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />
+                                    <Avatar alt="User settings" img={`https://api.akayamedia.com/content/${user.avatar}`} rounded />
+                                    // <Avatar alt="User settings" img={avatar} rounded />
                                 }
                             >
-                                <Dropdown.Header>
 
+
+                                <Dropdown.Header>
                                     <span className="block text-sm">{user.first_name} {user.last_name}</span>
                                     <span className="block truncate text-sm font-medium">{user.email}</span>
                                 </Dropdown.Header>
@@ -72,7 +74,7 @@ function NavbarComponent() {
 
                 </Navbar.Collapse>
             </Navbar>
-            
+
         </Flowbite>
 
     )
