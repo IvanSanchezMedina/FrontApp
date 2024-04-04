@@ -1,9 +1,9 @@
 "use client";
 
 import { useAuth } from "../context/AuthContext"
-import { Avatar, Dropdown, Navbar } from "flowbite-react";
+import { Avatar, Dropdown, Navbar, Label, TextInput } from "flowbite-react";
 import { DarkThemeToggle, Flowbite } from "flowbite-react";
-
+import { HiSearch,HiCursorClick} from "react-icons/hi";
 const customTheme = {
     button: {
         color: {
@@ -19,7 +19,7 @@ function NavbarComponent() {
         <Flowbite theme={{ theme: customTheme }}>
             <Navbar fluid rounded>
                 <Navbar.Brand href="https://flowbite-react.com">
-                    <img src="/favicon.svg" className="mr-3 h-6 sm:h-9" alt="" />
+                    <img src="https://stage.akayamedia.com/img/logo%20blanco.png" className="mr-3 h-6 sm:h-9" alt="" />
                     {/* <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Flowbite React</span> */}
                 </Navbar.Brand>
                 <div className="flex md:order-2">
@@ -29,8 +29,21 @@ function NavbarComponent() {
                                 arrowIcon={false}
                                 inline
                                 label={
-                                    <Avatar alt="User settings" img={`https://api.akayamedia.com/content/${user.avatar}`} rounded />
-                                    // <Avatar alt="User settings" img={avatar} rounded />
+                                    user.avatar === ''
+                                        ?
+                                        <Avatar rounded>
+                                            <div className="space-y-1 font-medium dark:text-white">
+                                                <div >{user.first_name} {user.last_name} {user.avatar}</div>
+                                                {/* <div className="text-sm text-gray-500 dark:text-gray-400">Joined in August 2014</div> */}
+                                            </div>
+                                        </Avatar>
+                                        :
+                                        <Avatar img={`https://api.akayamedia.com/content/${user.avatar}`} rounded>
+                                            <div className="space-y-1 font-medium dark:text-white">
+                                                <div >{user.first_name} {user.last_name}</div>
+                                                {/* <div className="text-sm text-gray-500 dark:text-gray-400">Joined in August 2014</div> */}
+                                            </div>
+                                        </Avatar>
                                 }
                             >
 
@@ -57,13 +70,14 @@ function NavbarComponent() {
                     <Navbar.Toggle />
                 </div>
                 <Navbar.Collapse >
-                    <Navbar.Link className="mt-2" href="#" active>
-                        Home
-                    </Navbar.Link>
-                    <Navbar.Link className="mt-2" href="#">About</Navbar.Link>
-                    <Navbar.Link className="mt-2" href="#">Services</Navbar.Link>
-                    <Navbar.Link className="mt-2" href="#">Pricing</Navbar.Link>
-                    <Navbar.Link className="mt-2" href="#">Contact</Navbar.Link>
+                    <div className="max-w-md">
+                        
+                        <TextInput id="email4" type="email" icon={HiSearch} rightIcon={HiCursorClick} placeholder="Search" required />
+                    </div>
+
+                    <Navbar.Link className="mt-2" href="/" active >Home </Navbar.Link>
+                    <Navbar.Link className="mt-2" href="/profile" >Profile</Navbar.Link>
+
                     <DarkThemeToggle />
                     {isAuthenticated ? (
                         <></>
