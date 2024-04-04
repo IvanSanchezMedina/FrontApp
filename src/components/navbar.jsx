@@ -1,10 +1,16 @@
 "use client";
 
 import { useAuth } from "../context/AuthContext"
-import { Avatar, Dropdown, Navbar, Label, TextInput } from "flowbite-react";
-import { DarkThemeToggle, Flowbite } from "flowbite-react";
-import { HiSearch, HiCursorClick, HiBookmark,HiUser } from "react-icons/hi";
+import {
+    Avatar, Dropdown, Navbar,
+    TextInput, Button, Modal,
+    DarkThemeToggle, Flowbite
+}
+    from "flowbite-react";
+import { HiSearch, HiCursorClick, HiBookmark, HiUser } from "react-icons/hi";
 import { IoLanguage } from "react-icons/io5";
+import { useTranslation } from "react-i18next";
+import { useState } from "react";
 const customTheme = {
     button: {
         color: {
@@ -16,6 +22,12 @@ const customTheme = {
 
 function NavbarComponent() {
     const { isAuthenticated, logout, user } = useAuth();
+    const [t, i18n] = useTranslation("global")
+    const [openModal, setOpenModal] = useState(false);
+    const changeLanguage = (language) => {
+        i18n.changeLanguage(language);
+        setOpenModal(false)
+    };
     return (
         <Flowbite theme={{ theme: customTheme }}>
             <Navbar fluid rounded>
@@ -53,13 +65,13 @@ function NavbarComponent() {
                                     <span className="block text-sm">{user.first_name} {user.last_name}</span>
                                     <span className="block truncate text-sm font-medium">{user.email}</span>
                                 </Dropdown.Header>
-                                <Dropdown.Item>Dashboard</Dropdown.Item>
-                                <Dropdown.Item>Settings</Dropdown.Item>
-                                <Dropdown.Item>Earnings</Dropdown.Item>
+                                <Dropdown.Item>{t("navbar.dashboard")}</Dropdown.Item>
+                                <Dropdown.Item>{t("navbar.configuration")}</Dropdown.Item>
+                                <Dropdown.Item>{t("navbar.profile")}</Dropdown.Item>
                                 <Dropdown.Divider />
                                 <Dropdown.Item onClick={() => {
                                     logout();
-                                }}>Sign out</Dropdown.Item>
+                                }}>{t("navbar.logout")}</Dropdown.Item>
                             </Dropdown>
                         ) :
                             (
@@ -74,13 +86,14 @@ function NavbarComponent() {
                         <TextInput id="email4" type="email" icon={HiSearch} rightIcon={HiCursorClick} placeholder="Search" required />
                     </div>
                     <Navbar.Link className="mt-2" href="/" active >
-                        <HiBookmark size={24}/>
+                        <HiBookmark size={24} />
                     </Navbar.Link>
                     <Navbar.Link className="mt-2" href="/profile" >
-                        <HiUser size={24}/>
+                        <HiUser size={24} />
                     </Navbar.Link>
-                    <Navbar.Link className="mt-2" href="/profile" >
-                        <IoLanguage size={24}/>
+                    <Navbar.Link className="mt-2" href="#" onClick={() => setOpenModal(true)} >
+                        <IoLanguage size={24} />      
+                        
                     </Navbar.Link>
                     <DarkThemeToggle />
                     {isAuthenticated ? (
@@ -90,7 +103,19 @@ function NavbarComponent() {
                     )}
                 </Navbar.Collapse>
             </Navbar>
-
+            <Modal  size="sm" show={openModal} onClose={() => setOpenModal(false)}>
+            <Modal.Header>{t("navbar.select_language")}</Modal.Header>
+                <Modal.Body> 
+                    <div className="space-y-6 ">
+                        <Button  className="mx-auto" color="light" onClick={() => changeLanguage('es')}>
+                            <span className={"fi fis fi-mx mr-2 fiCircle "} />ES
+                        </Button>
+                        <Button  className="mx-auto" color="light" onClick={() => changeLanguage('en')}>
+                            <span className={"fi fis fi-us mr-2 fiCircle "} />EN
+                        </Button>
+                    </div>
+                </Modal.Body>
+            </Modal>
         </Flowbite>
 
     )

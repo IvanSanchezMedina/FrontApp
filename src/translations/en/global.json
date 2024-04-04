@@ -1,0 +1,9 @@
+{
+    "navbar": {
+        "dashboard": "Dashboard",
+        "select_language": "Select Language",
+        "configuration": "Configuration",
+        "profile": "Profile",
+        "logout": "Logout"
+    }
+}

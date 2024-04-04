@@ -1,0 +1,9 @@
+{
+    "navbar": {
+        "dashboard": "Panel",
+        "select_language": "Selecciona un idioma",
+        "configuration": "Configuración",
+        "profile": "Perfil",
+        "logout": "Cerrar sesión"
+    }
+}
