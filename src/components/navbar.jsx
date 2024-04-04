@@ -3,7 +3,8 @@
 import { useAuth } from "../context/AuthContext"
 import { Avatar, Dropdown, Navbar, Label, TextInput } from "flowbite-react";
 import { DarkThemeToggle, Flowbite } from "flowbite-react";
-import { HiSearch,HiCursorClick} from "react-icons/hi";
+import { HiSearch, HiCursorClick, HiBookmark,HiUser } from "react-icons/hi";
+import { IoLanguage } from "react-icons/io5";
 const customTheme = {
     button: {
         color: {
@@ -63,7 +64,6 @@ function NavbarComponent() {
                         ) :
                             (
                                 <>  </>
-
                             )
                     }
 
@@ -71,21 +71,23 @@ function NavbarComponent() {
                 </div>
                 <Navbar.Collapse >
                     <div className="max-w-md">
-                        
                         <TextInput id="email4" type="email" icon={HiSearch} rightIcon={HiCursorClick} placeholder="Search" required />
                     </div>
-
-                    <Navbar.Link className="mt-2" href="/" active >Home </Navbar.Link>
-                    <Navbar.Link className="mt-2" href="/profile" >Profile</Navbar.Link>
-
+                    <Navbar.Link className="mt-2" href="/" active >
+                        <HiBookmark size={24}/>
+                    </Navbar.Link>
+                    <Navbar.Link className="mt-2" href="/profile" >
+                        <HiUser size={24}/>
+                    </Navbar.Link>
+                    <Navbar.Link className="mt-2" href="/profile" >
+                        <IoLanguage size={24}/>
+                    </Navbar.Link>
                     <DarkThemeToggle />
                     {isAuthenticated ? (
                         <></>
                     ) : (
                         <Navbar.Link className="mt-2" href="/login">Sing In</Navbar.Link>
-
                     )}
-
                 </Navbar.Collapse>
             </Navbar>
 
