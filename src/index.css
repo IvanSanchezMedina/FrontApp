@@ -2,9 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-  background: #202020;
-}
+
 
 .fiCircle {
   width: 24px;

@@ -30,7 +30,7 @@ function NavbarComponent() {
     };
     return (
         <Flowbite theme={{ theme: customTheme }}>
-            <Navbar fluid rounded>
+            <Navbar fluid >
                 <Navbar.Brand href="https://flowbite-react.com">
                     <img src="https://stage.akayamedia.com/img/logo%20blanco.png" className="mr-3 h-6 sm:h-9" alt="" />
                     {/* <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Flowbite React</span> */}
@@ -92,8 +92,8 @@ function NavbarComponent() {
                         <HiUser size={24} />
                     </Navbar.Link>
                     <Navbar.Link className="mt-2" href="#" onClick={() => setOpenModal(true)} >
-                        <IoLanguage size={24} />      
-                        
+                        <IoLanguage size={24} />
+
                     </Navbar.Link>
                     <DarkThemeToggle />
                     {isAuthenticated ? (
@@ -103,14 +103,14 @@ function NavbarComponent() {
                     )}
                 </Navbar.Collapse>
             </Navbar>
-            <Modal  size="sm" show={openModal} onClose={() => setOpenModal(false)}>
-            <Modal.Header>{t("navbar.select_language")}</Modal.Header>
-                <Modal.Body> 
+            <Modal size="sm" show={openModal} onClose={() => setOpenModal(false)}>
+                <Modal.Header>{t("navbar.select_language")}</Modal.Header>
+                <Modal.Body>
                     <div className="space-y-6 ">
-                        <Button  className="mx-auto" color="light" onClick={() => changeLanguage('es')}>
+                        <Button className="mx-auto" color="light" onClick={() => changeLanguage('es')}>
                             <span className={"fi fis fi-mx mr-2 fiCircle "} />ES
                         </Button>
-                        <Button  className="mx-auto" color="light" onClick={() => changeLanguage('en')}>
+                        <Button className="mx-auto" color="light" onClick={() => changeLanguage('en')}>
                             <span className={"fi fis fi-us mr-2 fiCircle "} />EN
                         </Button>
                     </div>
