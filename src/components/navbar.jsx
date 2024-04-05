@@ -82,8 +82,8 @@ function NavbarComponent() {
                     <Navbar.Toggle />
                 </div>
                 <Navbar.Collapse >
-                    <div className="max-w-md">
-                        <TextInput id="email4" type="email" icon={HiSearch} rightIcon={HiCursorClick} placeholder="Search" required />
+                    <div className="max-w-100">
+                        <TextInput className="w-100" id="email4" type="email" icon={HiSearch} rightIcon={HiCursorClick} placeholder="Search"/>
                     </div>
                     <Navbar.Link className="mt-2" href="/" active >
                         <HiBookmark size={24} />
@@ -93,7 +93,6 @@ function NavbarComponent() {
                     </Navbar.Link>
                     <Navbar.Link className="mt-2" href="#" onClick={() => setOpenModal(true)} >
                         <IoLanguage size={24} />
-
                     </Navbar.Link>
                     <DarkThemeToggle />
                     {isAuthenticated ? (

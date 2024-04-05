@@ -24,14 +24,12 @@ export const AuthProvider = ({ children }) => {
         try {
 
             const res = await registerRequest(user)
-            console.log('register',res)
           if (res.status === 200) {
             setUser(res.data)
             setIsAuthenticated(true)
           }
            
         } catch (error) {
-            console.log(error.response)
             setErrors(error.response.data)
         }
     }

@@ -8,7 +8,7 @@ function ProtectedRoute() {
     Loading ...
   </h1>
 
-  if(!loading && !isAuthenticated) return <Navigate to="/login" replace/>
+  if(!loading && !isAuthenticated) return <Navigate to="/" replace/>
   
   // If user is authenticated show the Dashboard page else redirect them to
   return <Outlet />;
