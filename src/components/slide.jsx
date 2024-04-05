@@ -2,7 +2,7 @@
 
 import { Carousel } from "flowbite-react";
 
-function carousel({ images }) {
+function slide({ images }) {
     return (
         <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
             <Carousel>
@@ -16,4 +16,4 @@ function carousel({ images }) {
     )
 }
 
-export default carousel
+export default slide
