@@ -1,3 +1,3 @@
 import axios from "./axios"
 
-export const getHomeSlideRequest = ()=> axios.get('/configuration_slides')
+export const getHomeSlideRequest = (language)=>axios.get(`/configuration_slides/${language}`);
