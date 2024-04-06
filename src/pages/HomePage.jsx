@@ -3,7 +3,8 @@ import { getHomeSlideRequest, getHomeBlocksRequest } from '../api/home';
 import Slide from '../components/slide'
 import { useEffect, useState, } from "react"
 import { useTranslation } from "react-i18next";
-import { Carousel } from "flowbite-react";
+import Blocks from '../components/blocks';
+
 function HomePage() {
     const [images, setImages] = useState([]);
     const [blocks, setBlocks] = useState([]);
@@ -50,76 +51,7 @@ function HomePage() {
         <div className="">
             <Slide images={images} />
 
-            {blocks.map((block, index) => (
-                <div key={index}>
-                    <h2>{block.name}</h2>
-                    {block.series && (
-                        <div>
-                            <div className="grid h-56 grid-cols-2 gap-4 sm:h-64 xl:h-80 2xl:h-96">
-                                <Carousel >
-                                    {block.series.map((serie, serieIndex) => (
-                                        <div key={serieIndex}>
-
-                                            <img src={`https://api.akayamedia.com/content/${serie.image}`} alt={serie.name} />
-
-                                        </div>
-                                    ))}
-                                </Carousel>
-                   
-                                <Carousel >
-                                    {block.series.map((serie, serieIndex) => (
-                                        <div key={serieIndex + halfLength}>
-
-                                            <img src={`https://api.akayamedia.com/content/${serie.image}`} alt={serie.name} />
-
-                                        </div>
-                                    ))}
-                                </Carousel>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            ))}
-
-            {/* Segundo map para la segunda mitad de los bloques */}
-            {/* {blocks.slice(halfLength).map((block, index) => (
-                <div key={index + halfLength}>
-                    <h2>{block.name}</h2>
-                    {block.series && (
-                        <div>
-                            {block.series.map((serie, serieIndex) => (
-                                <div key={serieIndex}>
-                                    <div className="grid h-56 grid-cols-2 gap-4 sm:h-64 xl:h-80 2xl:h-96">
-                                        <Carousel>
-                                            <img src={`https://api.akayamedia.com/content/${serie.image}`} alt={serie.name} />
-                                        </Carousel>
-                                        <Carousel indicators={false}>
-                                            <img src={`https://api.akayamedia.com/content/${serie.image}`} alt={serie.name} />
-                                        </Carousel>
-                                    </div>
-
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </div>
-            ))} */}
-            {/* <div className="grid h-56 grid-cols-2 gap-4 sm:h-64 xl:h-80 2xl:h-96">
-                <Carousel>
-                    <img src="https://flowbite.com/docs/images/carousel/carousel-1.svg" alt="..." />
-                    <img src="https://flowbite.com/docs/images/carousel/carousel-2.svg" alt="..." />
-                    <img src="https://flowbite.com/docs/images/carousel/carousel-3.svg" alt="..." />
-                    <img src="https://flowbite.com/docs/images/carousel/carousel-4.svg" alt="..." />
-                    <img src="https://flowbite.com/docs/images/carousel/carousel-5.svg" alt="..." />
-                </Carousel>
-                <Carousel indicators={false}>
-                    <img src="https://flowbite.com/docs/images/carousel/carousel-1.svg" alt="..." />
-                    <img src="https://flowbite.com/docs/images/carousel/carousel-2.svg" alt="..." />
-                    <img src="https://flowbite.com/docs/images/carousel/carousel-3.svg" alt="..." />
-                    <img src="https://flowbite.com/docs/images/carousel/carousel-4.svg" alt="..." />
-                    <img src="https://flowbite.com/docs/images/carousel/carousel-5.svg" alt="..." />
-                </Carousel>
-            </div> */}
+            <Blocks blocks= {blocks}/>
 
         </div>
 
