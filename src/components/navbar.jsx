@@ -11,6 +11,8 @@ import { HiSearch, HiCursorClick, HiBookmark, HiUser } from "react-icons/hi";
 import { IoLanguage } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
+import i18next from 'i18next'
+
 const customTheme = {
     button: {
         color: {
@@ -19,15 +21,19 @@ const customTheme = {
     },
 };
 
+i18next.init()
 
 function NavbarComponent() {
+
     const { isAuthenticated, logout, user } = useAuth();
     const [t, i18n] = useTranslation("global")
     const [openModal, setOpenModal] = useState(false);
     const changeLanguage = (language) => {
         i18n.changeLanguage(language);
+        localStorage.setItem('language', i18next.language);
         setOpenModal(false)
     };
+
     return (
         <Flowbite theme={{ theme: customTheme }}>
             <Navbar fluid >

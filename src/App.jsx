@@ -11,9 +11,10 @@ import i18next from 'i18next'
 import global_es from './translations/es/global.json'
 import global_en from './translations/en/global.json'
 import "flag-icons/css/flag-icons.min.css";
+
 i18next.init({
   interpolation: { escapeValue: false }, // not needed for react as it does escaping by default
-  lng: "es",
+  lng: localStorage.getItem('language') || 'en',
   resources: {
     es: {
       global: global_es
@@ -23,6 +24,7 @@ i18next.init({
     }
   }
 })
+
 function App() {
   return (
     <I18nextProvider i18n={i18next} >
