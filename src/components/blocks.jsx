@@ -38,7 +38,7 @@ function blocks({ blocks }) {
             {
                 breakpoint: 960,
                 settings: {
-                    slidesToShow: 3.5
+                    slidesToShow: 3
                 }
             },
             {
@@ -59,9 +59,9 @@ function blocks({ blocks }) {
         <div>
             {blocks.map((block, index) => (
                 <div key={index}>
-                    {block.type == 3 || block.type == 6 ?
+                    {block.type == 3 || block.type == 6 || block.type == 2 ?
                         <>
-                            <div className='mb-10 mt-10 titleBlock redLine text-slate-800'>
+                            <div className='mb-10 mt-10 titleBlock redLine text-slate-800 dark:text-white'>
                                 {block.name}
                             </div>
 
@@ -82,7 +82,7 @@ function blocks({ blocks }) {
                             {block.type == 4
                                 ?
                                 <>
-                                    <div className='mb-10 mt-10 titleBlock redLine text-slate-800'>
+                                    <div className='mb-10 mt-10 titleBlock redLine text-slate-800 dark:text-white'>
                                         {block.name}
                                     </div>
                                     <img src={`${block.img1}`} />
@@ -90,14 +90,14 @@ function blocks({ blocks }) {
 
                                 :
                                 <>
-                                    <div className=' md:text-blue-600  sm:text-red-600 mb-10 mt-10 titleBlock redLine text-slate-800'>
+                                    <div className='mb-10 mt-10 titleBlock redLine text-slate-800 dark:text-white'>
                                         {block.name}
                                     </div>
-                                    <div class="md:flex">
-                                        <div class="md:w-1/2  md:mr-3 md:mb-0 sm:mb-3 mb-3">
+                                    <div className="md:flex">
+                                        <div className="md:w-1/2  md:mr-3 md:mb-0 sm:mb-3 mb-3">
                                             <img src={`${block.img1}`} />
                                         </div>
-                                        <div class="md:w-1/2 md:ml-3  md:mt-0 sm:mt-3 mt-3">
+                                        <div className="md:w-1/2 md:ml-3  md:mt-0 sm:mt-3 mt-3">
                                             <img src={`${block.img2}`} />
                                         </div>
                                     </div>
@@ -111,9 +111,6 @@ function blocks({ blocks }) {
                 </div>
             ))}
         </div>
-
-
-
     )
 }
 

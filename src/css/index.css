@@ -23,7 +23,6 @@
   background: #d5092f;
   height: 2px;
   width: 200px;
-  /* bottom: 10px; */
   margin-left: 10px;
   transform: translateY(-50%);
   margin-top: 15px;
@@ -35,4 +34,5 @@
 .imageBlock{
   border-radius: 10px;
   border: none;
+  height: 280px;
 }
