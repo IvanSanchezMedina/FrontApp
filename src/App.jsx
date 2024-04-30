@@ -11,7 +11,7 @@ import i18next from 'i18next'
 import global_es from './translations/es/global.json'
 import global_en from './translations/en/global.json'
 import "flag-icons/css/flag-icons.min.css";
-
+import ProfilePage from './pages/ProfilePage'
 i18next.init({
   interpolation: { escapeValue: false }, // not needed for react as it does escaping by default
   lng: localStorage.getItem('language') || 'en',
@@ -39,7 +39,7 @@ function App() {
                 <Route path="/register" element={<RegisterPage></RegisterPage>} />ß
 
                 <Route element={<ProtectedRoute />}>
-                  <Route path="/profile" element={<h1>Profile</h1>} />
+                  <Route path="/profile" element={<ProfilePage></ProfilePage>} />
                 </Route>
 
               </Routes>

@@ -73,7 +73,7 @@ function NavbarComponent() {
                                 </Dropdown.Header>
                                 <Dropdown.Item>{t("navbar.dashboard")}</Dropdown.Item>
                                 <Dropdown.Item>{t("navbar.configuration")}</Dropdown.Item>
-                                <Dropdown.Item>{t("navbar.profile")}</Dropdown.Item>
+                                <Dropdown.Item href="/profile">{t("navbar.profile")}</Dropdown.Item>
                                 <Dropdown.Divider />
                                 <Dropdown.Item onClick={() => {
                                     logout();
