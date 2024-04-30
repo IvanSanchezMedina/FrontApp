@@ -89,14 +89,23 @@ function NavbarComponent() {
                 </div>
                 <Navbar.Collapse >
                     <div className="max-w-100">
-                        <TextInput className="w-100" id="email4" type="email" icon={HiSearch} rightIcon={HiCursorClick} placeholder="Search"/>
+                        <TextInput className="w-100" id="email4" type="email" icon={HiSearch} rightIcon={HiCursorClick} placeholder="Search" />
                     </div>
                     <Navbar.Link className="mt-2" href="/" active >
                         <HiBookmark size={24} />
                     </Navbar.Link>
-                    <Navbar.Link className="mt-2" href="/profile" >
-                        <HiUser size={24} />
-                    </Navbar.Link>
+                    <Dropdown
+                        className="marginLeftNone"
+                        arrowIcon={false}
+                        inline
+                        label={<HiUser size={24} className="block py-2 pl-3 pr-4 md:p-0 border-b border-gray-100 text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:hover:bg-transparent md:hover:text-cyan-700 md:dark:hover:bg-transparent md:dark:hover:text-white" />}
+                    >
+
+                        <Dropdown.Item href="/dashboard" >{t("navbar.dashboard")}</Dropdown.Item>
+                        <Dropdown.Item href="/myaccount" >{t("navbar.myaccount")}</Dropdown.Item>
+                        <Dropdown.Item href="/help" >{t("navbar.help")}</Dropdown.Item>
+                     
+                    </Dropdown>
                     <Navbar.Link className="mt-2" href="#" onClick={() => setOpenModal(true)} >
                         <IoLanguage size={24} />
                     </Navbar.Link>

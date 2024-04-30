@@ -4,6 +4,8 @@
         "select_language": "Select Language",
         "configuration": "Configuration",
         "profile": "Profile",
-        "logout": "Logout"
+        "logout": "Logout",
+        "myaccount": "My Account",
+        "help": "Help"
     }
 }

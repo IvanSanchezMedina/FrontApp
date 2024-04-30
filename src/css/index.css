@@ -36,3 +36,7 @@
   border: none;
   height: 280px;
 }
+
+.marginLeftNone{
+  margin-left: 0px !important;
+}
