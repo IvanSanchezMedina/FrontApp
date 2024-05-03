@@ -7,5 +7,35 @@
         "logout": "Cerrar sesión",
         "myaccount": "Mi cuenta",
         "help": "Ayuda"
+    },
+    "tabs": { 
+        "my-profile": "Mi Perfil",
+        "my-wall":"Mi Muro",
+        "my-series": "Mi Series"
+    },
+    "account":{
+        "personal-information":"Información Personal",
+        "email-information":"Correo Electronico",
+        "other-information":"Otro",
+        "first_name":"Nombre",
+        "last_name":"Apellido",
+        "username":"Usuario",
+        "tagline":"Tagline",
+        "email":"Correo",
+        "password":"Contraseña",
+        "new_password":"Nueva Contraseña",
+        "confirm_password":"Confirmar Contraseña",
+        "save":"Guardar",
+        "cancel":"Cancelar",
+        "birthday":"Cumpleaños",
+        "facebook":"Facebook",
+        "twitter":"Twitter",
+        "instagram":"Instagram",
+        "fav_serie_1":"Serie Favorita #1",
+        "fav_serie_2":"Serie Favorita #2",
+        "fav_serie_3":"Serie Favorita #3",
+        "adult_content":"Contenido para adultos",
+        "web":"Web"
     }
+
 }

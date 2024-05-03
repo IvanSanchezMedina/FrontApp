@@ -1,9 +1,10 @@
 "use client";
+import TabsProfile from "../components/TabsProfile";
 
 function ProfilePage() {
     return (
-        <div className="flex h-[calc(100vh-100px)] items-center justify-center ">
-          PROFILEPAGE
+        <div className=" flex-col items-center justify-center sm:w-full w-full ">
+       <TabsProfile/>
         </div>
     )
 }
