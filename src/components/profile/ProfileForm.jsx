@@ -3,103 +3,36 @@
 import { Label, Avatar } from "flowbite-react";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../context/AuthContext";
-import { useState, useEffect } from 'react';
-import { updateUserRequest } from "../../api/profile";
-import Cookies from "js-cookie";
+import { useState } from 'react';
+import { HiOutlinePencilAlt } from "react-icons/hi";
+import ProfileModal from "./ProfileModal";
 
 function ProfileForm() {
-  
-    const { user, updateUserAndToken } = useAuth();
-  
+
+    const [openModal, setOpenModal] = useState(true);
+
+    const { user } = useAuth();
+
     const [t, i18n] = useTranslation("global")
-
-    const updateUser = async (id, values) => {
-        try {
-
-            Cookies.remove('token')
-            const dataUser = await updateUserRequest(id, values)
-
-            if (dataUser.status === 200) {
-                const newToken = dataUser.data.token; // Asegúrate de que la respuesta contenga el nuevo token
-
-                Cookies.set('token', newToken);
-                updateUserAndToken(dataUser.data);
-            }
-
-        } catch (error) {
-            console.error('Error in update user:', error);
-        }
-    }
-
-    const [updatedUserInfo, setUpdatedUserInfo] = useState({
-        first_name: user.first_name,
-        last_name: user.last_name,
-        username: user.username
-        // Otros campos que desees actualizar
-    });
-
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setUpdatedUserInfo(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
-
-    // Controlador de evento para manejar el envío del formulario
-    const handleSubmit = async (event) => {
-        event.preventDefault(); // Evitar el envío del formulario por defecto
-
-        try {
-            // Llamar a la función updateUser con los valores actualizados del usuario
-            await updateUser(user.id, updatedUserInfo);
-            // Actualizar la información del usuario en la interfaz o mostrar un mensaje de éxito
-        } catch (error) {
-            console.error('Error al actualizar usuario:', error);
-        }
-    };
-
 
     return (
         <div className="flex-col flex items-center justify-center">
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="first_name"
-                    value={updatedUserInfo.first_name}
-                    onChange={handleInputChange}
-                />
-                <input
-                    type="text"
-                    name="last_name"
-                    value={updatedUserInfo.last_name}
-                    onChange={handleInputChange}
-                />
-                <input
-                    type="text"
-                    name="username"
-                    value={updatedUserInfo.username}
-                    onChange={handleInputChange}
-                />
-                {/* Otros campos que desees actualizar */}
-                <button type="submit">Actualizar</button>
-            </form>
+
             <div className="shadow-xl rounded-xl portada" style={{
                 background: `center / cover url(${user.header_img})`
             }}>
             </div>
-
+            <ProfileModal isOpen={openModal} onClose={() => setOpenModal(false)} />
             <div className="shadow-xl rounded-xl bg-white bottom-20 relative w-11/12" >
-
                 <div className="pl-5 pr-5 pt-5 pb-5 ">
                     <div className="md:flex">
-                        <div className="md:flex ">
-                            <div className="w-1/2 md:w-1/2">
+                        <div className="md:flex">
+                            <div className="w-1/3 md:w-1/3">
                                 <div className="flex flex-wrap items-center gap-2">
                                     <Avatar img={`https://api.akayamedia.com/content/${user.avatar}`} size="lg" rounded />
                                 </div>
                             </div>
-                            <div className="w-1/2 md:w-1/2 ">
+                            <div className="w-1/3 md:w-1/3 ml-10">
                                 <div className="block">
                                     <Label className="text-lg" value={user.first_name + ' ' + user.last_name} />
 
@@ -109,14 +42,25 @@ function ProfileForm() {
                                 </p>
 
                             </div>
+
                         </div>
 
                     </div>
                 </div>
 
                 <div className="pl-10 pr-10 pt-10 pb-10">
-                    <div className="mb-2 block">
-                        <Label className="text-xl" value={t("account.personal-information")} />
+                    <div className="md:flex block">
+                        <div className="w-1/2 md:w-1/2">
+                            <Label className="text-xl" value={t("account.personal-information")} />
+                        </div>
+                        <div className="w-1/2 md:w-1/2 ml-10 items-center content-center">
+                            <div className="block">
+                                <a href="#">
+                                    <HiOutlinePencilAlt size={24} onClick={() => setOpenModal(true)} />
+                                </a>
+
+                            </div>
+                        </div>
                     </div>
                     <div className="md:flex mt-10">
                         <div className="w-1/2 md:w-1/2  md:mr-3 md:mb-0 sm:mb-3 mb-3">
@@ -151,6 +95,16 @@ function ProfileForm() {
                             </p>
                             <div className="mb-2 block">
                                 <Label className="text-lg" value={user.birthday} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="md:flex mt-10">
+                        <div className="w-1/2 md:w-1/2  md:mr-3 md:mb-0 sm:mb-3 mb-3">
+                            <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
+                                {t("account.location")}
+                            </p>
+                            <div className="mb-2 block">
+                                <Label className="text-lg" value={user.location} />
                             </div>
                         </div>
                     </div>
@@ -203,7 +157,7 @@ function ProfileForm() {
                         </div>
                     </div>
                     <div className="md:flex mt-10">
-                        <div className="w-1/2 md:w-1/2  md:mr-3 md:mb-0 sm:mb-3 mb-3">
+                        <div className="w-1/2 md:w-1/2 md:mr-3 md:mb-0 sm:mb-3 mb-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                 {t("account.instagram")}
                             </p>
@@ -213,16 +167,6 @@ function ProfileForm() {
                         </div>
                         <div className="w-1/2 md:w-1/2 md:ml-3  md:mt-0 sm:mt-3 mt-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
-                                {t("account.tagline")}
-                            </p>
-                            <div className="mb-2 block">
-                                <Label className="text-lg" value={user.tagline} />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="md:flex mt-10">
-                        <div className="  md:mr-3 md:mb-0 sm:mb-3 mb-3">
-                            <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                 {t("account.web")}
                             </p>
                             <div className="mb-2 block">
@@ -230,6 +174,19 @@ function ProfileForm() {
                             </div>
                         </div>
                     </div>
+
+                    {user.type == 'author' ? <div className="md:flex mt-10">
+                        <div className="w-1/2 md:w-1/2 md:mr-3 md:mb-0 sm:mb-3 mb-3">
+                            <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
+                                {t("account.tagline")}
+                            </p>
+                            <div className="mb-2 block">
+                                <Label className="text-lg" value={user.tagline} />
+                            </div>
+                        </div>
+                    </div> : <></>}
+
+
                     <div className="md:flex mt-10">
                         <div className="w-1/2 md:w-1/2  md:mr-3 md:mb-0 sm:mb-3 mb-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">

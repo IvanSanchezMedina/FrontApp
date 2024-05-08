@@ -35,7 +35,8 @@
         "fav_serie_2":"Serie Favorita #2",
         "fav_serie_3":"Serie Favorita #3",
         "adult_content":"Contenido para adultos",
-        "web":"Web"
+        "web":"Web",
+        "location":"Locación"
     }
 
 }
