@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Checkbox, Label, Modal, TextInput, Datepicker, Select } from "flowbite-react";
+import { Button, Label, Modal, TextInput, Datepicker, Select, Textarea } from "flowbite-react";
 import { useState, useEffect } from "react";
 import { updateUserRequest } from "../../api/profile";
 import Cookies from "js-cookie";
@@ -8,21 +8,18 @@ import { useAuth } from "../../context/AuthContext";
 import { useTranslation } from "react-i18next";
 import SelectComponent from "../inputs/SelectComponent";
 import { getCountriesRequest } from "../../api/otherData";
+import { HiMail } from "react-icons/hi";
+import SwitchComponent from "../inputs/SwitchComponent";
 
 function ProfileModal({ isOpen, onClose }) {
 
     const [options, setOptions] = useState([]);
     const [selectedOption, setSelectedOption] = useState(null);
     const [t, i18n] = useTranslation("global")
-    const [email, setEmail] = useState('');
 
     const { user, updateUserAndToken } = useAuth();
-
-    function onCloseModal() {
-        setOpenModal(false);
-        setEmail('');
-    }
-
+    const [switchAdultContent, setSwitchAdultContent] = useState(user.adult_content);
+    const [switchActivity, setSwitchActivity] = useState(user.profile_with_activity);
     const updateUser = async (id, values) => {
         try {
 
@@ -53,7 +50,8 @@ function ProfileModal({ isOpen, onClose }) {
         instagram: user.instagram,
         web: user.web,
         tagline: user.tagline,
-        location: user.location
+        location: user.location,
+        bio: user.bio
     });
 
     const handleDateChange = (value) => {
@@ -62,6 +60,33 @@ function ProfileModal({ isOpen, onClose }) {
             ...prevState,
             birthday: formattedDate
         }));
+    };
+
+    const handleSwitchChange = (isChecked, switchType) => {
+        // Utiliza un switch para determinar qué switch se está cambiando
+        switch (switchType) {
+            case "adult_content":
+                // Actualiza el estado del switch de contenido para adultos
+                setSwitchAdultContent(isChecked);
+                // Actualiza el estado del usuario para contenido para adultos
+                setUpdatedUserInfo(prevState => ({
+                    ...prevState,
+                    adult_content: isChecked
+                }));
+                break;
+            case "profile_with_activity":
+                // Actualiza el estado del switch de actividad
+                setSwitchActivity(isChecked);
+                // Actualiza el estado del usuario para perfil con actividad
+                setUpdatedUserInfo(prevState => ({
+                    ...prevState,
+                    profile_with_activity: isChecked
+                }));
+                break;
+            // Agrega más casos según sea necesario para manejar más switches
+            default:
+                break;
+        }
     };
 
     const handleSelectChange = (selectedOption) => {
@@ -112,16 +137,17 @@ function ProfileModal({ isOpen, onClose }) {
     }, []);
 
     return (
-        <div>
-            <Modal show={isOpen} size="xl" onClose={onClose} popup>
+        <div >
+
+            <Modal show={isOpen} size="4xl" onClose={onClose} popup>
                 <Modal.Header />
                 <Modal.Body>
                     <form onSubmit={handleSubmit}>
-                        <div className="space-y-6">
-                            <h3 className="text-xl font-medium text-gray-900 dark:text-white">Sign in to our platform</h3>
+                        <div className="space-y-6" > 
+                            <h3 className="text-xl font-medium text-gray-900 dark:text-white">{t("account.update-profile")}</h3>
                             <div>
                                 <div className="mb-2 block">
-                                    <Label htmlFor="first_name" value={t("account.first_name")} />
+                                    <Label htmlFor="first_name" value={t("account.first-name")} />
                                 </div>
                                 <TextInput
                                     id="first_name"
@@ -134,7 +160,7 @@ function ProfileModal({ isOpen, onClose }) {
                             </div>
                             <div>
                                 <div className="mb-2 block">
-                                    <Label htmlFor="last_name" value={t("account.last_name")} />
+                                    <Label htmlFor="last_name" value={t("account.last-name")} />
                                 </div>
                                 <TextInput
                                     id="last_name"
@@ -149,6 +175,7 @@ function ProfileModal({ isOpen, onClose }) {
                                     <Label htmlFor="username" value={t("account.username")} />
                                 </div>
                                 <TextInput
+                                    addon="@"
                                     id="username"
                                     name="username"
                                     type="text"
@@ -170,6 +197,20 @@ function ProfileModal({ isOpen, onClose }) {
                                     onSelectedDateChanged={handleDateChange}
                                     required />
                             </div>
+                            <div>
+
+                                <div className="mb-2 block">
+                                    <Label htmlFor="birthday" value={t("account.biography")} />
+                                </div>
+                                <Textarea
+                                    id="bio"
+                                    name="bio"
+                                    placeholder={t("account.biography")}
+                                    required
+                                    value={updatedUserInfo.bio}
+                                    onChange={handleInputChange}
+                                    rows={4} />
+                            </div>
                             <div className="max-w-md">
                                 <div className="mb-2 block">
                                     <Label htmlFor="countries" value="Select your country" />
@@ -186,7 +227,6 @@ function ProfileModal({ isOpen, onClose }) {
                                     <Label htmlFor="web" value={t("account.location")} />
                                 </div>
                                 <SelectComponent
-                                   
                                     value={updatedUserInfo.location}
                                     options={options}
                                     onChange={handleSelectChange}
@@ -199,6 +239,7 @@ function ProfileModal({ isOpen, onClose }) {
                                     <Label htmlFor="email" value={t("account.email")} />
                                 </div>
                                 <TextInput
+                                    icon={HiMail}
                                     id="email"
                                     name="email"
                                     type="text"
@@ -211,6 +252,7 @@ function ProfileModal({ isOpen, onClose }) {
                                     <Label htmlFor="facebook" value={t("account.facebook")} />
                                 </div>
                                 <TextInput
+                                    addon="@"
                                     id="facebook"
                                     name="facebook"
                                     type="text"
@@ -223,6 +265,7 @@ function ProfileModal({ isOpen, onClose }) {
                                     <Label htmlFor="twitter" value={t("account.twitter")} />
                                 </div>
                                 <TextInput
+                                    addon="@"
                                     id="twitter"
                                     name="twitter"
                                     type="text"
@@ -235,6 +278,7 @@ function ProfileModal({ isOpen, onClose }) {
                                     <Label htmlFor="instagram" value={t("account.instagram")} />
                                 </div>
                                 <TextInput
+                                    addon="@"
                                     id="instagram"
                                     name="instagram"
                                     type="text"
@@ -270,23 +314,32 @@ function ProfileModal({ isOpen, onClose }) {
                                 : <></>}
 
 
-                            <div className="flex justify-between">
-                                <div className="flex items-center gap-2">
-                                    <Checkbox id="remember" />
-                                    <Label htmlFor="remember">Remember me</Label>
+                            <div className="md:flex">
+                                <div className="w-1/2 md:w-1/2">
+                                    <div className="mb-2 block">
+                                        <Label htmlFor="web" value={t("account.adult-content")} />
+                                    </div>
+                                    <SwitchComponent
+                                        checked={switchAdultContent}
+                                        onChange={(isChecked) => handleSwitchChange(isChecked, "adult_content")}
+                                        placeholder={t("account.adult-content")}
+                                    />
                                 </div>
-                                <a href="#" className="text-sm text-cyan-700 hover:underline dark:text-cyan-500">
-                                    Lost Password?
-                                </a>
+                                <div className="w-1/2 md:w-1/2 ml-10">
+                                    <div className="mb-2 block">
+                                        <Label htmlFor="web" value={t("account.profile-with-activity")} />
+                                    </div>
+                                    <SwitchComponent
+                                        checked={switchActivity}
+                                        onChange={(isChecked) => handleSwitchChange(isChecked, "profile_with_activity")}
+                                        placeholder={t("account.profile-with-activity")}
+                                    />
+
+                                </div>
+
                             </div>
                             <div className="w-full">
-                                <Button type="submit">Log in to your account</Button>
-                            </div>
-                            <div className="flex justify-between text-sm font-medium text-gray-500 dark:text-gray-300">
-                                Not registered?&nbsp;
-                                <a href="#" className="text-cyan-700 hover:underline dark:text-cyan-500">
-                                    Create account
-                                </a>
+                                <Button className="w-full  " type="submit">{t("account.button-submit")}</Button>
                             </div>
                         </div>
                     </form>

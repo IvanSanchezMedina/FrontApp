@@ -1,7 +1,7 @@
 {
     "navbar": {
         "dashboard": "Dashboard",
-        "select_language": "Select Language",
+        "select-language": "Select Language",
         "configuration": "Configuration",
         "profile": "Profile",
         "logout": "Logout",
@@ -17,26 +17,30 @@
         "personal-information":"Personal Information",
         "email-information":"Email",
         "other-information":"Other",
-        "first_name":"First Name",
-        "last_name":"Last Name",
+        "first-name":"First Name",
+        "last-name":"Last Name",
         "username":"Username",
         "tagline":"Tagline",
         "email":"Email",
         "password":"Password",
-        "new_password":"New Password",
-        "confirm_password":"Confirm Password",
+        "new-password":"New Password",
+        "confirm-password":"Confirm Password",
         "save":"Save",
         "cancel":"Cancel",
         "birthday":"Birthday",
         "facebook":"Facebook",
         "twitter":"Twitter",
         "instagram":"Instagram",
-        "fav_serie_1":"Favorite Serie #1",
-        "fav_serie_2":"Favorite Serie #2",
-        "fav_serie_3":"Favorite Serie #3",
-        "adult_content":"Adult content",
+        "fav-serie-1":"Favorite Serie #1",
+        "fav-serie-2":"Favorite Serie #2",
+        "fav-serie-3":"Favorite Serie #3",
+        "adult-content":"Adult content",
         "web":"Web",
-        "location":"Location"
+        "location":"Location",
+        "update-profile":"Update profile",
+        "button-submit":"Update",
+        "biography":"Biografía",
+        "profile-with-activity":"Mostrar actividad en Perfil"
     }
 
 }

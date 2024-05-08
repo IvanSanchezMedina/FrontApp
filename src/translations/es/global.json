@@ -1,7 +1,7 @@
 {
     "navbar": {
         "dashboard": "Panel",
-        "select_language": "Selecciona un idioma",
+        "select-language": "Selecciona un idioma",
         "configuration": "Configuración",
         "profile": "Perfil",
         "logout": "Cerrar sesión",
@@ -17,26 +17,30 @@
         "personal-information":"Información Personal",
         "email-information":"Correo Electronico",
         "other-information":"Otro",
-        "first_name":"Nombre",
-        "last_name":"Apellido",
+        "first-name":"Nombre",
+        "last-name":"Apellido",
         "username":"Usuario",
         "tagline":"Tagline",
         "email":"Correo",
         "password":"Contraseña",
-        "new_password":"Nueva Contraseña",
-        "confirm_password":"Confirmar Contraseña",
+        "new-password":"Nueva Contraseña",
+        "confirm-password":"Confirmar Contraseña",
         "save":"Guardar",
         "cancel":"Cancelar",
         "birthday":"Cumpleaños",
         "facebook":"Facebook",
         "twitter":"Twitter",
         "instagram":"Instagram",
-        "fav_serie_1":"Serie Favorita #1",
-        "fav_serie_2":"Serie Favorita #2",
-        "fav_serie_3":"Serie Favorita #3",
-        "adult_content":"Contenido para adultos",
+        "fav-serie-1":"Serie Favorita #1",
+        "fav-serie-2":"Serie Favorita #2",
+        "fav-serie-3":"Serie Favorita #3",
+        "adult-content":"Contenido para adultos",
         "web":"Web",
-        "location":"Locación"
+        "location":"Locación",
+        "update-profile":"Actualizar perfil",
+        "button-submit":"Actualizar",
+        "biography":"Biography",
+        "profile-with-activity":"Show profile activity"
     }
 
 }

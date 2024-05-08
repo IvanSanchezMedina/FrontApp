@@ -1,6 +1,6 @@
 "use client";
 
-import { Label, Avatar } from "flowbite-react";
+import { Label, Avatar, ToggleSwitch } from "flowbite-react";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../context/AuthContext";
 import { useState } from 'react';
@@ -23,7 +23,7 @@ function ProfileForm() {
             }}>
             </div>
             <ProfileModal isOpen={openModal} onClose={() => setOpenModal(false)} />
-            <div className="shadow-xl rounded-xl bg-white bottom-20 relative w-11/12" >
+            <div className="shadow-xl rounded-xl dark:bg-slate-700 bg-white bottom-20 relative w-11/12" >
                 <div className="pl-5 pr-5 pt-5 pb-5 ">
                     <div className="md:flex">
                         <div className="md:flex">
@@ -56,7 +56,7 @@ function ProfileForm() {
                         <div className="w-1/2 md:w-1/2 ml-10 items-center content-center">
                             <div className="block">
                                 <a href="#">
-                                    <HiOutlinePencilAlt size={24} onClick={() => setOpenModal(true)} />
+                                    <HiOutlinePencilAlt className="dark:text-white" size={24} onClick={() => setOpenModal(true)} />
                                 </a>
 
                             </div>
@@ -65,7 +65,7 @@ function ProfileForm() {
                     <div className="md:flex mt-10">
                         <div className="w-1/2 md:w-1/2  md:mr-3 md:mb-0 sm:mb-3 mb-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
-                                {t("account.first_name")}
+                                {t("account.first-name")}
                             </p>
                             <div className="mb-2 block">
                                 <Label className="text-lg" value={user.first_name} />
@@ -73,7 +73,7 @@ function ProfileForm() {
                         </div>
                         <div className="w-1/2 md:w-1/2 md:ml-3  md:mt-0 sm:mt-3 mt-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
-                                {t("account.last_name")}
+                                {t("account.last-name")}
                             </p>
                             <div className="mb-2 block">
                                 <Label className="text-lg" value={user.last_name} />
@@ -105,6 +105,16 @@ function ProfileForm() {
                             </p>
                             <div className="mb-2 block">
                                 <Label className="text-lg" value={user.location} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="md:flex mt-5">
+                        <div className="w-1/2 md:w-1/2  md:mr-3 md:mb-0 sm:mb-3 mb-3">
+                            <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
+                                {t("account.biography")}
+                            </p>
+                            <div className="mb-2 block">
+                                <Label className="text-lg" value={user.bio} />
                             </div>
                         </div>
                     </div>
@@ -190,7 +200,7 @@ function ProfileForm() {
                     <div className="md:flex mt-10">
                         <div className="w-1/2 md:w-1/2  md:mr-3 md:mb-0 sm:mb-3 mb-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
-                                {t("account.fav_serie_1")}
+                                {t("account.fav-serie-1")}
                             </p>
                             <div className="mb-2 block">
                                 <Label className="text-lg" value={user.fav_serie_1} />
@@ -198,28 +208,39 @@ function ProfileForm() {
                         </div>
                         <div className="w-1/2 md:w-1/2 md:ml-3  md:mt-0 sm:mt-3 mt-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
-                                {t("account.fav_serie_1")}
+                                {t("account.fav-serie-2")}
                             </p>
                             <div className="mb-2 block">
-                                <Label className="text-lg" value={user.fav_serie_1} />
+                                <Label className="text-lg" value={user.fav_serie_2} />
                             </div>
                         </div>
                     </div>
                     <div className="md:flex mt-10">
                         <div className="w-1/2 md:w-1/2  md:mr-3 md:mb-0 sm:mb-3 mb-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
-                                {t("account.fav_serie_3")}
+                                {t("account.fav-serie-3")}
                             </p>
                             <div className="mb-2 block">
                                 <Label className="text-lg" value={user.fav_serie_3} />
                             </div>
                         </div>
+                    </div>
+                    <div className="md:flex mt-10">
                         <div className="w-1/2 md:w-1/2 md:ml-3  md:mt-0 sm:mt-3 mt-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
-                                {t("account.adult_content")}
+                                {t("account.adult-content")}
                             </p>
                             <div className="mb-2 block">
-                                <Label className="text-lg" value={user.adult_content} />
+                                <ToggleSwitch checked={user.adult_content} disabled />
+                            </div>
+                        </div>
+                        <div className="w-1/2 md:w-1/2 md:ml-3  md:mt-0 sm:mt-3 mt-3">
+                            <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
+                                {t("account.profile-with-activity")}
+                            </p>
+                            <div className="mb-2 block">
+                                <ToggleSwitch checked={user.profile_with_activity} disabled />
+
                             </div>
                         </div>
                     </div>
