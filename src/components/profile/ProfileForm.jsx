@@ -3,17 +3,44 @@
 import { Label, Avatar, ToggleSwitch } from "flowbite-react";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../context/AuthContext";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { HiOutlinePencilAlt } from "react-icons/hi";
 import ProfileModal from "./ProfileModal";
+import {getSeriesNameById} from "../../api//helpers/series.js"
 
 function ProfileForm() {
 
-    const [openModal, setOpenModal] = useState(true);
+    const [serieName1, setSerieName1] = useState(null);
+    const [serieName2, setSerieName2] = useState(null);
+    const [serieName3, setSerieName3] = useState(null);
+
+    const [openModal, setOpenModal] = useState(false);
 
     const { user } = useAuth();
 
     const [t, i18n] = useTranslation("global")
+
+    
+    useEffect(() => {
+        const fetchData = async () => {
+        
+            if(user.fav_serie_1){
+                const name = await getSeriesNameById(user.fav_serie_1);
+                setSerieName1(name);
+            }
+            if(user.fav_serie_2){
+                const name = await getSeriesNameById(user.fav_serie_2);
+                setSerieName2(name);
+            }
+            if(user.fav_serie_3){
+                const name = await getSeriesNameById(user.fav_serie_3);
+                setSerieName3(name);
+            }
+          
+        };
+    
+        fetchData();
+      });
 
     return (
         <div className="flex-col flex items-center justify-center">
@@ -198,7 +225,8 @@ function ProfileForm() {
                                 {t("account.fav-serie-1")}
                             </p>
                             <div className="mb-2 block">
-                                <Label className="text-lg" value={user.fav_serie_1} />
+                            <Label className="text-lg" value={serieName1} />
+
                             </div>
                         </div>
                         <div className="w-1/2 md:w-1/2 md:mt-0 sm:mt-3 mt-3">
@@ -206,7 +234,7 @@ function ProfileForm() {
                                 {t("account.fav-serie-2")}
                             </p>
                             <div className="mb-2 block">
-                                <Label className="text-lg" value={user.fav_serie_2} />
+                                <Label className="text-lg" value={serieName2} />
                             </div>
                         </div>
                     </div>
@@ -216,10 +244,10 @@ function ProfileForm() {
                                 {t("account.fav-serie-3")}
                             </p>
                             <div className="mb-2 block">
-                                <Label className="text-lg" value={user.fav_serie_3} />
+                                <Label className="text-lg" value={serieName3} />
                             </div>
                         </div>
-                    </div>
+                    </div> 
                     <div className="md:flex mt-10">
                         <div className="w-1/2 md:w-1/2 md:mt-0 sm:mt-3 mt-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
@@ -241,7 +269,6 @@ function ProfileForm() {
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

@@ -25,7 +25,6 @@ function HomePage() {
     const getHomeBlocks = async (language) => {
         try {
             const blocksRes = await getHomeBlocksRequest(language);
-            console.log(blocksRes)
             setBlocks(blocksRes.data);
         } catch (error) {
             console.error('Error fetching home blocks:', error);
