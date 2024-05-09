@@ -139,12 +139,12 @@ function ProfileModal({ isOpen, onClose }) {
     return (
         <div >
 
-            <Modal show={isOpen} size="4xl" onClose={onClose} popup>
-                <Modal.Header />
-                <Modal.Body>
+            <Modal show={isOpen} size="4xl" onClose={onClose} popup className="dark:bg-slate-700">
+                <Modal.Header  className="dark:bg-slate-900" />
+                <Modal.Body className="dark:bg-slate-900">
                     <form onSubmit={handleSubmit}>
-                        <div className="space-y-6" > 
-                            <h3 className="text-xl font-medium text-gray-900 dark:text-white">{t("account.update-profile")}</h3>
+                        <div className="space-y-6" >
+                            <h3 className="text-xl font-medium text-gray-900 dark:text-white ">{t("account.update-profile")}</h3>
                             <div>
                                 <div className="mb-2 block">
                                     <Label htmlFor="first_name" value={t("account.first-name")} />
@@ -210,17 +210,6 @@ function ProfileModal({ isOpen, onClose }) {
                                     value={updatedUserInfo.bio}
                                     onChange={handleInputChange}
                                     rows={4} />
-                            </div>
-                            <div className="max-w-md">
-                                <div className="mb-2 block">
-                                    <Label htmlFor="countries" value="Select your country" />
-                                </div>
-                                <Select id="countries" required>
-                                    <option>United States</option>
-                                    <option>Canada</option>
-                                    <option>France</option>
-                                    <option>Germany</option>
-                                </Select>
                             </div>
                             <div>
                                 <div className="mb-2 block">

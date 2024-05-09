@@ -57,3 +57,7 @@ body {
   background-position: 50% center;
   overflow: hidden;
 }
+
+.selectReact  [type='text']:focus {
+  --tw-ring-inset: none;
+} 

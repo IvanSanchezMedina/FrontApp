@@ -35,16 +35,12 @@ function ProfileForm() {
                             <div className="w-1/3 md:w-1/3 ml-10">
                                 <div className="block">
                                     <Label className="text-lg" value={user.first_name + ' ' + user.last_name} />
-
                                 </div>
                                 <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                     {user.username}
                                 </p>
-
                             </div>
-
                         </div>
-
                     </div>
                 </div>
 
@@ -58,12 +54,11 @@ function ProfileForm() {
                                 <a href="#">
                                     <HiOutlinePencilAlt className="dark:text-white" size={24} onClick={() => setOpenModal(true)} />
                                 </a>
-
                             </div>
                         </div>
                     </div>
                     <div className="md:flex mt-10">
-                        <div className="w-1/2 md:w-1/2  md:mr-3 md:mb-0 sm:mb-3 mb-3">
+                        <div className="w-1/2 md:w-1/2 md:mb-0 sm:mb-3 mb-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                 {t("account.first-name")}
                             </p>
@@ -71,7 +66,7 @@ function ProfileForm() {
                                 <Label className="text-lg" value={user.first_name} />
                             </div>
                         </div>
-                        <div className="w-1/2 md:w-1/2 md:ml-3  md:mt-0 sm:mt-3 mt-3">
+                        <div className="w-1/2 md:w-1/2 md:mt-0 sm:mt-3 mt-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                 {t("account.last-name")}
                             </p>
@@ -81,7 +76,7 @@ function ProfileForm() {
                         </div>
                     </div>
                     <div className="md:flex mt-5">
-                        <div className="w-1/2 md:w-1/2  md:mr-3 md:mb-0 sm:mb-3 mb-3">
+                        <div className="w-1/2 md:w-1/2 md:mb-0 sm:mb-3 mb-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                 {t("account.username")}
                             </p>
@@ -89,7 +84,7 @@ function ProfileForm() {
                                 <Label className="text-lg" value={user.username} />
                             </div>
                         </div>
-                        <div className="w-1/2 md:w-1/2 md:ml-3  md:mt-0 sm:mt-3 mt-3">
+                        <div className="w-1/2 md:w-1/2 md:mt-0 sm:mt-3 mt-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                 {t("account.birthday")}
                             </p>
@@ -99,7 +94,7 @@ function ProfileForm() {
                         </div>
                     </div>
                     <div className="md:flex mt-10">
-                        <div className="w-1/2 md:w-1/2  md:mr-3 md:mb-0 sm:mb-3 mb-3">
+                        <div className="w-1/2 md:w-1/2 md:mb-0 sm:mb-3 mb-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                 {t("account.location")}
                             </p>
@@ -109,7 +104,7 @@ function ProfileForm() {
                         </div>
                     </div>
                     <div className="md:flex mt-5">
-                        <div className="w-1/2 md:w-1/2  md:mr-3 md:mb-0 sm:mb-3 mb-3">
+                        <div className="w-1/2 md:w-1/2 md:mb-0 sm:mb-3 mb-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                 {t("account.biography")}
                             </p>
@@ -125,7 +120,7 @@ function ProfileForm() {
                         <Label className="text-xl" value={t("account.email-information")} />
                     </div>
                     <div className="md:flex mt-5">
-                        <div className="w-1/2 md:w-1/2 md:mr-3 md:mb-0 sm:mb-3 mb-3">
+                        <div className="w-1/2 md:w-1/2 md:mb-0 sm:mb-3 mb-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                 {t("account.email")}
                             </p>
@@ -133,7 +128,7 @@ function ProfileForm() {
                                 <Label className="text-lg" value={user.email} />
                             </div>
                         </div>
-                        <div className="w-1/2 md:w-1/2 md:mr-3 md:mb-0 sm:mb-3 mb-3">
+                        <div className="w-1/2 md:w-1/2 md:mb-0 sm:mb-3 mb-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                 {t("account.password")}
                             </p>
@@ -149,7 +144,7 @@ function ProfileForm() {
                         <Label className="text-xl" value={t("account.other-information")} />
                     </div>
                     <div className="md:flex mt-10">
-                        <div className="w-1/2 md:w-1/2 md:mr-3 md:mb-0 sm:mb-3 mb-3">
+                        <div className="w-1/2 md:w-1/2 md:mb-0 sm:mb-3 mb-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                 {t("account.facebook")}
                             </p>
@@ -157,7 +152,7 @@ function ProfileForm() {
                                 <Label className="text-lg" value={user.facebook} />
                             </div>
                         </div>
-                        <div className="w-1/2 md:w-1/2 md:ml-3  md:mt-0 sm:mt-3 mt-3">
+                        <div className="w-1/2 md:w-1/2 md:mt-0 sm:mt-3 mt-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                 {t("account.twitter")}
                             </p>
@@ -167,7 +162,7 @@ function ProfileForm() {
                         </div>
                     </div>
                     <div className="md:flex mt-10">
-                        <div className="w-1/2 md:w-1/2 md:mr-3 md:mb-0 sm:mb-3 mb-3">
+                        <div className="w-1/2 md:w-1/2 md:mb-0 sm:mb-3 mb-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                 {t("account.instagram")}
                             </p>
@@ -175,7 +170,7 @@ function ProfileForm() {
                                 <Label className="text-lg" value={user.instagram} />
                             </div>
                         </div>
-                        <div className="w-1/2 md:w-1/2 md:ml-3  md:mt-0 sm:mt-3 mt-3">
+                        <div className="w-1/2 md:w-1/2 md:mt-0 sm:mt-3 mt-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                 {t("account.web")}
                             </p>
@@ -186,7 +181,7 @@ function ProfileForm() {
                     </div>
 
                     {user.type == 'author' ? <div className="md:flex mt-10">
-                        <div className="w-1/2 md:w-1/2 md:mr-3 md:mb-0 sm:mb-3 mb-3">
+                        <div className="w-1/2 md:w-1/2   md:mb-0 sm:mb-3 mb-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                 {t("account.tagline")}
                             </p>
@@ -198,7 +193,7 @@ function ProfileForm() {
 
 
                     <div className="md:flex mt-10">
-                        <div className="w-1/2 md:w-1/2  md:mr-3 md:mb-0 sm:mb-3 mb-3">
+                        <div className="w-1/2 md:w-1/2 md:mb-0 sm:mb-3 mb-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                 {t("account.fav-serie-1")}
                             </p>
@@ -206,7 +201,7 @@ function ProfileForm() {
                                 <Label className="text-lg" value={user.fav_serie_1} />
                             </div>
                         </div>
-                        <div className="w-1/2 md:w-1/2 md:ml-3  md:mt-0 sm:mt-3 mt-3">
+                        <div className="w-1/2 md:w-1/2 md:mt-0 sm:mt-3 mt-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                 {t("account.fav-serie-2")}
                             </p>
@@ -216,7 +211,7 @@ function ProfileForm() {
                         </div>
                     </div>
                     <div className="md:flex mt-10">
-                        <div className="w-1/2 md:w-1/2  md:mr-3 md:mb-0 sm:mb-3 mb-3">
+                        <div className="w-1/2 md:w-1/2 md:mb-0 sm:mb-3 mb-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                 {t("account.fav-serie-3")}
                             </p>
@@ -226,7 +221,7 @@ function ProfileForm() {
                         </div>
                     </div>
                     <div className="md:flex mt-10">
-                        <div className="w-1/2 md:w-1/2 md:ml-3  md:mt-0 sm:mt-3 mt-3">
+                        <div className="w-1/2 md:w-1/2 md:mt-0 sm:mt-3 mt-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                 {t("account.adult-content")}
                             </p>
@@ -234,7 +229,7 @@ function ProfileForm() {
                                 <ToggleSwitch checked={user.adult_content} disabled />
                             </div>
                         </div>
-                        <div className="w-1/2 md:w-1/2 md:ml-3  md:mt-0 sm:mt-3 mt-3">
+                        <div className="w-1/2 md:w-1/2 md:mt-0 sm:mt-3 mt-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">
                                 {t("account.profile-with-activity")}
                             </p>
