@@ -40,7 +40,11 @@
         "update-profile":"Update profile",
         "button-submit":"Update",
         "biography":"Biografía",
-        "profile-with-activity":"Mostrar actividad en Perfil"
+        "profile-with-activity":"Show profile activity",
+        "select":"Select",
+        "select-serie":"a serie #",
+        "select-country":"a country",
+        "series":"Favorite serie #"
     }
 
 }

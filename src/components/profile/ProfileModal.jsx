@@ -1,20 +1,24 @@
 "use client";
 
-import { Button, Label, Modal, TextInput, Datepicker, Select, Textarea } from "flowbite-react";
+import { Button, Label, Modal, TextInput, Datepicker, Textarea } from "flowbite-react";
 import { useState, useEffect } from "react";
 import { updateUserRequest } from "../../api/profile";
 import Cookies from "js-cookie";
 import { useAuth } from "../../context/AuthContext";
 import { useTranslation } from "react-i18next";
 import SelectComponent from "../inputs/SelectComponent";
-import { getCountriesRequest } from "../../api/otherData";
+import { getCountriesRequest, getSeriesRequest } from "../../api/otherData";
 import { HiMail } from "react-icons/hi";
 import SwitchComponent from "../inputs/SwitchComponent";
 
 function ProfileModal({ isOpen, onClose }) {
 
-    const [options, setOptions] = useState([]);
+    const [optionsCountries, setOptionsCountries] = useState([]);
+    const [optionsSeries, setOptionsSeries] = useState([]);
     const [selectedCountryOption, setSelectedCountriesOptions] = useState(null);
+    const [selectedSerieOption1, setSelectedSerieOption1] = useState(null);
+    const [selectedSerieOption2, setSelectedSerieOption2] = useState(null);
+    const [selectedSerieOption3, setSelectedSerieOption3] = useState(null);
     const [t, i18n] = useTranslation("global")
 
     const { user, updateUserAndToken } = useAuth();
@@ -98,24 +102,6 @@ function ProfileModal({ isOpen, onClose }) {
         console.log(event)
     };
 
-    const handleSelectCountriesChange = (selectedCountryOption) => {
-        setSelectedCountriesOptions(selectedCountryOption);
-        setUpdatedUserInfo(prevState => ({
-            ...prevState,
-            location: selectedCountryOption.label
-        }));
-    };
-
-    
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            await updateUser(user.id, updatedUserInfo);
-        } catch (error) {
-            console.error('Error al actualizar usuario:', error);
-        }
-    };
-
     const getCountries = async () => {
         try {
 
@@ -125,7 +111,7 @@ function ProfileModal({ isOpen, onClose }) {
                     value: item.id,
                     label: item.name
                 }));
-                setOptions(data);
+                setOptionsCountries(data);
             }
 
         } catch (error) {
@@ -133,9 +119,69 @@ function ProfileModal({ isOpen, onClose }) {
         }
     };
 
-    // useEffect(() => {
-    //     getCountries();
-    // }, []);
+    const handleSelectCountriesChange = (selectedCountryOption) => {
+        setSelectedCountriesOptions(selectedCountryOption);
+        setUpdatedUserInfo(prevState => ({
+            ...prevState,
+            location: selectedCountryOption.label
+        }));
+    };
+
+    const getSeries = async () => {
+        try {
+
+            const dataSeries = await getSeriesRequest()
+            if (dataSeries.status === 200) {
+                const data = dataSeries.data.map(item => ({
+                    value: item.id,
+                    label: item.name
+                }));
+                setOptionsSeries(data);
+            }
+
+        } catch (error) {
+            console.error('Error al obtener paises:', error);
+        }
+    };
+
+    const handleSelectSeriesChange1 = (selectedSerieOption) => {
+        setSelectedSerieOption1(selectedSerieOption);
+        setUpdatedUserInfo(prevState => ({
+            ...prevState,
+            fav_serie_1: selectedSerieOption.value
+        }));
+    };
+
+    const handleSelectSeriesChange2 = (selectedSerieOption) => {
+        setSelectedSerieOption2(selectedSerieOption);
+        setUpdatedUserInfo(prevState => ({
+            ...prevState,
+            fav_serie_2: selectedSerieOption.value
+        }));
+    };
+
+    const handleSelectSeriesChange3 = (selectedSerieOption) => {
+        setSelectedSerieOption3(selectedSerieOption);
+        setUpdatedUserInfo(prevState => ({
+            ...prevState,
+            fav_serie_3: selectedSerieOption.value
+        }));
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            await updateUser(user.id, updatedUserInfo);
+        } catch (error) {
+            console.error('Error al actualizar usuario:', error);
+        }
+    };
+
+
+    useEffect(() => {
+        getCountries();
+        getSeries();
+    }, []);
 
     useEffect(() => {
         if (user.location) {
@@ -145,18 +191,75 @@ function ProfileModal({ isOpen, onClose }) {
                 location: user.location
             }));
         }
+        if (user.fav_serie_1) {
+            setSelectedSerieOption1({ value: user.fav_serie_1, label: user.fav_serie_1 });
+            setUpdatedUserInfo(prevState => ({
+                ...prevState,
+                fav_serie_1: user.fav_serie_1
+            }));
+        }
+        if (user.fav_serie_2) {
+            setSelectedSerieOption2({ value: user.fav_serie_2, label: user.fav_serie_2 });
+            setUpdatedUserInfo(prevState => ({
+                ...prevState,
+                fav_serie_2: user.fav_serie_2
+            }));
+        }
+        if (user.fav_serie_3) {
+            setSelectedSerieOption3({ value: user.fav_serie_3, label: user.fav_serie_3 });
+            setUpdatedUserInfo(prevState => ({
+                ...prevState,
+                fav_serie_3: user.fav_serie_3
+            }));
+        }
         getCountries();
-    }, [user.location]);
+        getSeries();
+    }, [user.location, user.fav_serie_1,user.fav_serie_2,user.fav_serie_3]);
 
     return (
         <div >
 
             <Modal show={isOpen} size="4xl" onClose={onClose} popup className="dark:bg-slate-700">
-                <Modal.Header  className="dark:bg-slate-900" />
+                <Modal.Header className="dark:bg-slate-900" />
                 <Modal.Body className="dark:bg-slate-900">
                     <form onSubmit={handleSubmit}>
                         <div className="space-y-6" >
                             <h3 className="text-xl font-medium text-gray-900 dark:text-white ">{t("account.update-profile")}</h3>
+                            <div>
+                                <div className="mb-2 block">
+                                    <Label htmlFor="web" value={t("account.series") + '1'} />
+                                </div>
+                                <SelectComponent
+                                    value={updatedUserInfo.fav_serie_1}
+                                    options={optionsSeries}
+                                    onChange={handleSelectSeriesChange1}
+                                    selectedOption={selectedSerieOption1}
+                                    placeholder={t("account.select") + ' ' + t("account.select-serie") + '1'} />
+
+                            </div>
+                            <div>
+                                <div className="mb-2 block">
+                                    <Label htmlFor="web" value={t("account.series") + '2'} />
+                                </div>
+                                <SelectComponent
+                                    value={updatedUserInfo.fav_serie_2}
+                                    options={optionsSeries}
+                                    onChange={handleSelectSeriesChange2}
+                                    selectedOption={selectedSerieOption2}
+                                    placeholder={t("account.select") + ' ' + t("account.select-serie") + '2'} />
+                            </div>
+
+                            <div>
+                                <div className="mb-2 block">
+                                    <Label htmlFor="web" value={t("account.series") + '3'} />
+                                </div>
+                                <SelectComponent
+                                    value={updatedUserInfo.fav_serie_3}
+                                    options={optionsSeries}
+                                    onChange={handleSelectSeriesChange3}
+                                    selectedOption={selectedSerieOption3}
+                                    placeholder={t("account.select") + ' ' + t("account.select-serie") + '3'} />
+                            </div>
                             <div>
                                 <div className="mb-2 block">
                                     <Label htmlFor="first_name" value={t("account.first-name")} />
@@ -229,10 +332,10 @@ function ProfileModal({ isOpen, onClose }) {
                                 </div>
                                 <SelectComponent
                                     value={updatedUserInfo.location}
-                                    options={options}
+                                    options={optionsCountries}
                                     onChange={handleSelectCountriesChange}
                                     selectedOption={selectedCountryOption}
-                                    placeholder="Selecciona una país..." />
+                                    placeholder={t("account.select") + ' ' + t("account.select-country")} />
 
                             </div>
                             <div>
