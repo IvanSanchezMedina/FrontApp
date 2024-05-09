@@ -14,7 +14,7 @@ import SwitchComponent from "../inputs/SwitchComponent";
 function ProfileModal({ isOpen, onClose }) {
 
     const [options, setOptions] = useState([]);
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [selectedCountryOption, setSelectedCountriesOptions] = useState(null);
     const [t, i18n] = useTranslation("global")
 
     const { user, updateUserAndToken } = useAuth();
@@ -89,14 +89,6 @@ function ProfileModal({ isOpen, onClose }) {
         }
     };
 
-    const handleSelectChange = (selectedOption) => {
-        setSelectedOption(selectedOption);
-        setUpdatedUserInfo(prevState => ({
-            ...prevState,
-            location: selectedOption.label
-        }));
-    };
-
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setUpdatedUserInfo(prevState => ({
@@ -106,6 +98,15 @@ function ProfileModal({ isOpen, onClose }) {
         console.log(event)
     };
 
+    const handleSelectCountriesChange = (selectedCountryOption) => {
+        setSelectedCountriesOptions(selectedCountryOption);
+        setUpdatedUserInfo(prevState => ({
+            ...prevState,
+            location: selectedCountryOption.label
+        }));
+    };
+
+    
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -132,9 +133,20 @@ function ProfileModal({ isOpen, onClose }) {
         }
     };
 
+    // useEffect(() => {
+    //     getCountries();
+    // }, []);
+
     useEffect(() => {
+        if (user.location) {
+            setSelectedCountriesOptions({ value: user.location, label: user.location });
+            setUpdatedUserInfo(prevState => ({
+                ...prevState,
+                location: user.location
+            }));
+        }
         getCountries();
-    }, []);
+    }, [user.location]);
 
     return (
         <div >
@@ -218,8 +230,8 @@ function ProfileModal({ isOpen, onClose }) {
                                 <SelectComponent
                                     value={updatedUserInfo.location}
                                     options={options}
-                                    onChange={handleSelectChange}
-                                    selectedOption={selectedOption}
+                                    onChange={handleSelectCountriesChange}
+                                    selectedOption={selectedCountryOption}
                                     placeholder="Selecciona una país..." />
 
                             </div>
