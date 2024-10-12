@@ -47,7 +47,7 @@ function HomePage() {
     const halfLength = Math.ceil(blocks.length / 2); // Calcula la mitad de la longitud de la matriz de bloques
 
     return (
-        <div className="">
+        <div className="px-5 sm:px-0">
             <Slide images={images} />
 
             <Blocks blocks= {blocks}/>

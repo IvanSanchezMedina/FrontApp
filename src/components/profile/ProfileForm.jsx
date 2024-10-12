@@ -6,7 +6,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useState, useEffect } from 'react';
 import { HiOutlinePencilAlt } from "react-icons/hi";
 import ProfileModal from "./ProfileModal";
-import {getSeriesNameById} from "../../api//helpers/series.js"
+import { getSeriesNameById } from "../../api//helpers/series.js"
 
 function ProfileForm() {
 
@@ -20,27 +20,27 @@ function ProfileForm() {
 
     const [t, i18n] = useTranslation("global")
 
-    
+
     useEffect(() => {
         const fetchData = async () => {
-        
-            if(user.fav_serie_1){
+
+            if (user.fav_serie_1) {
                 const name = await getSeriesNameById(user.fav_serie_1);
                 setSerieName1(name);
             }
-            if(user.fav_serie_2){
+            if (user.fav_serie_2) {
                 const name = await getSeriesNameById(user.fav_serie_2);
                 setSerieName2(name);
             }
-            if(user.fav_serie_3){
+            if (user.fav_serie_3) {
                 const name = await getSeriesNameById(user.fav_serie_3);
                 setSerieName3(name);
             }
-          
+
         };
-    
+
         fetchData();
-      });
+    });
 
     return (
         <div className="flex-col flex items-center justify-center">
@@ -54,9 +54,26 @@ function ProfileForm() {
                 <div className="pl-5 pr-5 pt-5 pb-5 ">
                     <div className="md:flex">
                         <div className="md:flex">
-                            <div className="w-1/3 md:w-1/3">
+                            <div className="w-1/2 md:w-1/2">
                                 <div className="flex flex-wrap items-center gap-2">
-                                    <Avatar img={`https://api.akayamedia.com/content/${user.avatar}`} size="lg" rounded />
+                                    {user.avatar !== null ?
+                                        <>
+                                            <Avatar img={`https://api.akayamedia.com/content/${user.avatar}`} size="lg" rounded status="busy" statusPosition="top-right" />
+                                            <a href="#">
+                                                <HiOutlinePencilAlt className="dark:text-white" size={24} onClick={() => setOpenModal(true)} />
+                                            </a>
+                                        </>
+
+                                        :
+                                        <>
+                                            <Avatar size="lg" rounded />
+                                            <a href="#">
+                                                <HiOutlinePencilAlt className="dark:text-white" size={24} onClick={() => setOpenModal(true)} />
+                                            </a>
+                                        </>
+
+                                    }
+
                                 </div>
                             </div>
                             <div className="w-1/3 md:w-1/3 ml-10">
@@ -225,7 +242,7 @@ function ProfileForm() {
                                 {t("account.fav-serie-1")}
                             </p>
                             <div className="mb-2 block">
-                            <Label className="text-lg" value={serieName1} />
+                                <Label className="text-lg" value={serieName1} />
 
                             </div>
                         </div>
@@ -247,7 +264,7 @@ function ProfileForm() {
                                 <Label className="text-lg" value={serieName3} />
                             </div>
                         </div>
-                    </div> 
+                    </div>
                     <div className="md:flex mt-10">
                         <div className="w-1/2 md:w-1/2 md:mt-0 sm:mt-3 mt-3">
                             <p className="font-light text-sm  text-gray-700 dark:text-gray-400">

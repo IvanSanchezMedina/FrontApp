@@ -118,7 +118,7 @@ function NavbarComponent() {
                 </Navbar.Collapse>
             </Navbar>
             <Modal size="sm" show={openModal} onClose={() => setOpenModal(false)}>
-                <Modal.Header>{t("navbar.select_language")}</Modal.Header>
+                <Modal.Header>{t("navbar.select-language")}</Modal.Header>
                 <Modal.Body>
                     <div className="space-y-6 ">
                         <Button className="mx-auto" color="light" onClick={() => changeLanguage('es')}>
